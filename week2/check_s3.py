@@ -11,7 +11,7 @@ bucket_name = "hasan-assignment"
 start = time.time()
 for i in range(1, 101):
     file_name = f"taehee-s3/submission_{i}.csv"
-    s3.upload_file("submission.csv", bucket_name, file_name)    
+    s3.upload_file("submission.csv", bucket_name, file_name)
 end = time.time()
 print(f"Upload files to s3 bucket: {end - start} seconds")
 print(f"Upload files to s3 bucket: {(end - start) / 100} seconds per file")
