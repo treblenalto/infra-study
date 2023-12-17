@@ -104,8 +104,7 @@ ECS: http://13.208.172.38:8080
 4. EBS 볼륨 마운트
 
    ```
-   mkdir ebs # 마운트 할 디렉토리 생성
-   blkid # 파일시스템들이 UUID, TYPE 확인
+   blkid # 파일시스템 UUID, TYPE 확인
 
    sudo vi /etc/fstab # 마운트 할 파일시스템의 UUID 추가
    sudo mount -a
