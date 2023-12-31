@@ -145,8 +145,8 @@ OLTP 에서 INFILE 로 넣는 경우를 제외한다면 record insert 속도는 
    mysql -h {rds-name}.{region}.rds.amazonaws.com -P {port} -u {db-user} -p
    ```
 5. 쿼리
-   1. 기존의 CSV 기반으로 insert 할 시 row 하나하나씩 넣는 것 보다 `INFILE` 을 통해 넣는 것이 훨씬 빠르다. 891 개 record 의 CSV 로딩하는데 0.112sec 소요됨
-   2. record 하나에 대한 insert 연산 0.032sec 정도 소요됨
+   1. 기존의 CSV 기반으로 insert 할 시 row 하나하나씩 넣는 것 보다 `INFILE` 을 통해 넣는 것이 훨씬 빠르다. 891 개 record 의 CSV 로딩하는데 0.112 sec 소요됨
+   2. record 하나에 대한 insert 연산 0.032 sec 정도 소요됨
 
 ### Redshift: OLAP
 
@@ -157,8 +157,8 @@ S3 -> Redshift 로 데이터 적재 진행
 3. Redshift 에서 S3 접근 가능한 IAM 역할 추가
 4. AWS Query Editor 사용해 테이블 생성
    1. `CREDENTIALS` 로 IAM role 넣어주기
-   2. 전체 insert 하는데 평균적으로 0.161sec 정도 소요됨
-   3. record 하나에 대한 insert 당 0.034sec 소요됨
+   2. 전체 insert 하는데 평균적으로 0.161 sec 정도 소요됨
+   3. record 하나에 대한 insert 당 0.034 sec 소요됨
    4. 각 쿼리 실행 계획마다 컴파일하는 방식이라 쿼리를 처음 실행 할 때는 오버헤드 비용이 발생하는 현상을 보였다. 일회성 쿼리들보다는 동일한 후속 쿼리들이 많을 경우에 더 적합해 보인다.
 
 ### DynamoDB: NoSQL
@@ -166,14 +166,14 @@ S3 -> Redshift 로 데이터 적재 진행
 1. DynamoDB 테이블 생성
 2. Partition Key 지정
 3. Boto3 사용해 record 삽입
-   1. 전체 insert 하는데 332.678sec 소요됨
-   2. record 하나에 대한 insert 당 0.373sec 소요됨
+   1. 전체 insert 하는데 332.678 sec 소요됨
+   2. record 하나에 대한 insert 당 0.373 sec 소요됨
 
 ### ElastiCache: In-Memory
 
 1. ElastiCache Redis 생성
 2. 보안그룹 설정
 3. Python redis 사용해 record 삽입
-   1. 전체 insert 하는데 0.896sec 소요됨
-   2. record 하나에 대한 insert 당 0.001sec 소요됨
+   1. 전체 insert 하는데 0.896 sec 소요됨
+   2. record 하나에 대한 insert 당 0.001 sec 소요됨
    3. Pipeline 사용하면 더 빠르게도 처리 가능할 듯
