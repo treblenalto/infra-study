@@ -14,7 +14,7 @@ CREATE TABLE titanic (
     Cabin text NULL,
     Embarked text NULL
 );
-LOAD DATA LOCAL INFILE '/Users/taehee/Downloads/titanic.csv' INTO TABLE titanic
+LOAD DATA LOCAL INFILE '~/Downloads/titanic.csv' INTO TABLE titanic
 FIELDS TERMINATED BY ',' -- csv
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
