@@ -2,15 +2,14 @@
 
 ## Week1. Computing Service: Hello, World!
 
-> - fastAPI로 root에 접속 시 `Hello, World!` 를 반환하는 초간단 서버
-> - 도커로 컨테이너화하기
+> - fastAPI로 root에 접속 시 `Hello, World!` 를 반환하는 초간단 서버 도커로 컨테이너화하기
 > - EC2(t2.micro)에서 외부접속 가능하도록 도커 띄우기
 > - ECS fargate로 외부접속 가능하도록 띄우기
 
 EC2: http://15.168.62.119:8080 <br>
 ECS: http://13.208.172.38:8080
 
-#### EC2
+### EC2
 
 1. EC2 컨테이너 생성 및 pem 키 발급
 2. EC2 접속
@@ -26,7 +25,7 @@ ECS: http://13.208.172.38:8080
    sudo docker-compose up
    ```
 
-#### ECR
+### ECR
 
 1. AWS CLI 로그인
    ```
@@ -46,7 +45,7 @@ ECS: http://13.208.172.38:8080
    docker push {name}:{tag} {ecr-repo-uri}:{tag}
    ```
 
-#### ECS
+### ECS
 
 1. ECS 클러스터 생성
 2. ECS task definition 생성
@@ -57,7 +56,7 @@ ECS: http://13.208.172.38:8080
 
 ## Week2. Storage Service: Store & Load
 
-#### Lambda
+### Lambda
 
 > S3 에 파일 업로드 시 슬랙 채널에 메세지가 오도록 하는 Lambda 구현
 
@@ -67,9 +66,12 @@ ECS: http://13.208.172.38:8080
 4. 슬랙으로 알람 보내주는 코드 작성
    1. 이벤트로부터 메타데이터 받아와 원하는 정보 파싱
    2. 민감한 정보들은 환경변수로 설정
-5. 💡 디버깅할 때 S3를 통해 계속 트리거하기보다는 목표하는 이벤트 로그로부터 테스트를 설정해 돌리는 것이 편하다
+5. 결과
 
-#### [EBS, EFS, S3](https://www.notion.so/corcaai/week2-809a95fb8fd24016817db477f9f4adca?pvs=4)
+   <img width="338" alt="image" src="https://github.com/treblenalto/infra-study/assets/63901494/cdb8cbba-6d65-4e64-8420-142020526bfc"><br>
+   💡 디버깅 시 S3를 통해 계속 트리거하기보다는 목표하는 이벤트 로그로부터 테스트를 설정해 돌리는 것이 편하다
+
+### [EBS, EFS, S3](https://www.notion.so/corcaai/week2-809a95fb8fd24016817db477f9f4adca?pvs=4)
 
 > EC2에서 EBS, EFS, S3에 각각 파일을 100번씩 store, load 하는 시간 측정 및 비교
 
@@ -89,17 +91,17 @@ ECS: http://13.208.172.38:8080
 #### EBS
 
 1. EC2 인스턴스 스토리지로 EBS 를 지정해서 인스턴스 생성 or EBS 볼륨 추가
-2. EBS 볼륨 연결 확인 - 디바이스 명이 /dev/sdf or /dev/sda 일 시 최신 Linux 커널이 내부적으로 xvdf으로 변경
+2. EBS 볼륨 연결 확인 - 디바이스 명이 `/dev/sdf` or `/dev/sda` 일 시 최신 Linux 커널이 내부적으로 `xvdf`으로 변경
    ```
    ls -asl /dev/xvd*
    ```
 3. EBS 볼륨 파일시스템 포맷
    1. `/dev/xvdf: data` -> 파일시스템 존재 X
-   2. Linux 파일시스템: ext, ext2, ext3, ext4, xfs
+   2. Linux 파일시스템: `ext`, `ext2`, `ext3`, `ext4`, `xfs`
    ```
    file -s /dev/xvdf # 파일시스템 존재여부 확인
    df -hT # root 파일시스템 확인
-   mkfs -t {volume type} /dev/xvdf
+   mkfs -t {volume type} /dev/xvdf # 파일시스템 생성
    ```
 4. EBS 볼륨 마운트
 
